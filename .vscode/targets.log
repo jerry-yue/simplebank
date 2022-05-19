@@ -10,7 +10,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 make: *** No rule to make target `all'.  Stop.
 
 
-# Make data base, printed on Thu May 19 12:05:33 2022
+# Make data base, printed on Thu May 19 15:29:32 2022
 
 # Variables
 
@@ -41,11 +41,12 @@ VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
+ 
 __CFBundleIdentifier = com.microsoft.VSCode
 # environment
 P9K_SSH = 0
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /var/folders/17/z8x_h1c13mj42k2sfcn0c4200000gn/T/vscode-ipc-cc493ad6-0727-41fa-83fb-f516807048f7.sock
+VSCODE_IPC_HOOK_EXTHOST = /var/folders/17/z8x_h1c13mj42k2sfcn0c4200000gn/T/vscode-ipc-a40e431c-ef58-4ce7-a13a-71d3ed2894c0.sock
 # environment
 VSCODE_CWD = /
 # environment
@@ -56,6 +57,8 @@ PATH = /Library/Frameworks/Python.framework/Versions/3.7/bin:/Library/Frameworks
 LSCOLORS = Gxfxcxdxbxegedabagacad
 # environment
 GOPATH = /Users/jerryyue/go
+# environment
+LaunchInstanceID = A7CC7435-385A-41CB-8266-D98C42AB3C4D
 # environment
 VSCODE_LOG_STACK = false
 # environment
@@ -142,6 +145,8 @@ MAKEFILES :=
 PAGER = less
 # environment
 LC_ALL = C
+# environment
+SECURITYSESSIONID = 186a3
 # automatic
 ^F = $(notdir $^)
 # default
@@ -153,9 +158,9 @@ MAKELEVEL := 0
 # environment
 LANG = C
 # environment
-VSCODE_PID = 587
+VSCODE_PID = 9036
 # variable set hash-table stats:
-# Load=70/1024=7%, Rehash=0, Collisions=2/94=2%
+# Load=72/1024=7%, Rehash=0, Collisions=2/96=2%
 
 # Pattern-specific Variable Values
 
@@ -163,13 +168,14 @@ VSCODE_PID = 587
 
 # Directories
 
-# . (device 16777220, inode 12606862): 9 files, no impossibilities.
+# . (device 16777220, inode 12606862): 11 files, no impossibilities.
 
-# 9 files, no impossibilities in 1 directories.
+# 11 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
 # No implicit rules.
+ 
 
 # Files
 
@@ -275,6 +281,6 @@ migratedown:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Thu May 19 12:05:33 2022
+# Finished Make data base on Thu May 19 15:29:32 2022
 
  

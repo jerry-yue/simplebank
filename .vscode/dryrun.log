@@ -1,5 +1,6 @@
 make --dry-run --always-make --keep-going --print-directory
 make: Entering directory `/Users/jerryyue/Desktop/CICD/simplebank'
+ 
 docker run --name postgres12 -e POSTGRES_USER=root -e POSTGRES_PASSWORD=P@ssw0rd -p 5432:5432 -d postgres:12.10-alpine 
 make: Leaving directory `/Users/jerryyue/Desktop/CICD/simplebank'
  
