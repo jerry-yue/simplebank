@@ -6,11 +6,8 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # PARTICULAR PURPOSE.
 
 # This program built for i386-apple-darwin11.3.0
- 
-make: *** No rule to make target `all'.  Stop.
 
-
-# Make data base, printed on Thu May 19 15:29:32 2022
+# Make data base, printed on Thu May 19 20:07:10 2022
 
 # Variables
 
@@ -41,12 +38,11 @@ VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
- 
 __CFBundleIdentifier = com.microsoft.VSCode
 # environment
 P9K_SSH = 0
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /var/folders/17/z8x_h1c13mj42k2sfcn0c4200000gn/T/vscode-ipc-a40e431c-ef58-4ce7-a13a-71d3ed2894c0.sock
+VSCODE_IPC_HOOK_EXTHOST = /var/folders/17/z8x_h1c13mj42k2sfcn0c4200000gn/T/vscode-ipc-1a19440e-0057-4811-9aae-69e95025aaf4.sock
 # environment
 VSCODE_CWD = /
 # environment
@@ -57,8 +53,6 @@ PATH = /Library/Frameworks/Python.framework/Versions/3.7/bin:/Library/Frameworks
 LSCOLORS = Gxfxcxdxbxegedabagacad
 # environment
 GOPATH = /Users/jerryyue/go
-# environment
-LaunchInstanceID = A7CC7435-385A-41CB-8266-D98C42AB3C4D
 # environment
 VSCODE_LOG_STACK = false
 # environment
@@ -82,7 +76,7 @@ HOME = /Users/jerryyue
 # default
 MAKEFILEPATH := /Applications/Xcode.app/Contents/Developer/Makefiles
 # environment
-VSCODE_CODE_CACHE_PATH = /Users/jerryyue/Library/Application Support/Code/CachedData/da15b6fd3ef856477bf6f4fb29ba1b7af717770d
+VSCODE_CODE_CACHE_PATH = /Users/jerryyue/Library/Application Support/Code/CachedData/c3511e6c69bb39013c4a4b7b9566ec1ca73fc4d5
 # environment
 LOGNAME = jerryyue
 # environment
@@ -120,7 +114,7 @@ TMPDIR = /var/folders/17/z8x_h1c13mj42k2sfcn0c4200000gn/T/
 # automatic
 *F = $(notdir $*)
 # environment
-VSCODE_IPC_HOOK = /Users/jerryyue/Library/Application Support/Code/1.67.1-main.sock
+VSCODE_IPC_HOOK = /Users/jerryyue/Library/Application Support/Code/1.67.2-main.sock
 # makefile
 MAKEFLAGS = Rrqp
 # environment
@@ -128,7 +122,7 @@ MFLAGS = -Rrqp
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
-XPC_SERVICE_NAME = application.com.microsoft.VSCode.12178341.12178347
+XPC_SERVICE_NAME = application.com.microsoft.VSCode.12673067.12673073
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # automatic
@@ -145,8 +139,6 @@ MAKEFILES :=
 PAGER = less
 # environment
 LC_ALL = C
-# environment
-SECURITYSESSIONID = 186a3
 # automatic
 ^F = $(notdir $^)
 # default
@@ -158,9 +150,9 @@ MAKELEVEL := 0
 # environment
 LANG = C
 # environment
-VSCODE_PID = 9036
+VSCODE_PID = 16919
 # variable set hash-table stats:
-# Load=72/1024=7%, Rehash=0, Collisions=2/96=2%
+# Load=70/1024=7%, Rehash=0, Collisions=2/94=2%
 
 # Pattern-specific Variable Values
 
@@ -168,14 +160,13 @@ VSCODE_PID = 9036
 
 # Directories
 
-# . (device 16777220, inode 12606862): 11 files, no impossibilities.
+# . (device 16777220, inode 12606862): 12 files, no impossibilities.
 
-# 11 files, no impossibilities in 1 directories.
+# 12 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
 # No implicit rules.
- 
 
 # Files
 
@@ -197,7 +188,7 @@ all:
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
-.PHONY: postgres createdb dropdb migratedown migrateup sqlc
+.PHONY: postgres createdb dropdb migratedown migrateup sqlc test
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -220,11 +211,20 @@ sqlc:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-05-19 00:35:45
+#  Last modified 2022-05-19 17:45:03
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+test:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 20):
+	go test -v -cover ./...
+	
 
 createdb:
 #  Phony target (prerequisite of .PHONY).
@@ -269,7 +269,7 @@ migratedown:
 	
 
 # files hash-table stats:
-# Load=11/1024=1%, Rehash=0, Collisions=0/29=0%
+# Load=12/1024=1%, Rehash=0, Collisions=0/31=0%
 # VPATH Search Paths
 
 # No `vpath' search paths.
@@ -281,6 +281,8 @@ migratedown:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Thu May 19 15:29:32 2022
+# Finished Make data base on Thu May 19 20:07:10 2022
 
  
+make: *** No rule to make target `all'.  Stop.
+
