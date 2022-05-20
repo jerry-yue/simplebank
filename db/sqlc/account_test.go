@@ -6,15 +6,13 @@ import (
 	"testing"
 	"time"
 
+	"github.com/jerry-yue/simplebank/util"
 	"github.com/stretchr/testify/require"
-	"github.com/techschool/simplebank/util"
 )
 
 func createRandomAccount(t *testing.T) Account {
-	user := createRandomUser(t)
-
 	arg := CreateAccountParams{
-		Owner:    user.Username,
+		Owner:    util.RandomOwner(),
 		Balance:  util.RandomMoney(),
 		Currency: util.RandomCurrency(),
 	}
@@ -47,6 +45,7 @@ func TestGetAccount(t *testing.T) {
 	require.Equal(t, account1.Owner, account2.Owner)
 	require.Equal(t, account1.Balance, account2.Balance)
 	require.Equal(t, account1.Currency, account2.Currency)
+
 	require.WithinDuration(t, account1.CreatedAt, account2.CreatedAt, time.Second)
 }
 
@@ -66,6 +65,7 @@ func TestUpdateAccount(t *testing.T) {
 	require.Equal(t, account1.Owner, account2.Owner)
 	require.Equal(t, arg.Balance, account2.Balance)
 	require.Equal(t, account1.Currency, account2.Currency)
+
 	require.WithinDuration(t, account1.CreatedAt, account2.CreatedAt, time.Second)
 }
 
@@ -80,24 +80,21 @@ func TestDeleteAccount(t *testing.T) {
 	require.Empty(t, account2)
 }
 
-func TestListAccounts(t *testing.T) {
-	var lastAccount Account
+func TestListAccount(t *testing.T) {
 	for i := 0; i < 10; i++ {
-		lastAccount = createRandomAccount(t)
+		createRandomAccount(t)
 	}
 
 	arg := ListAccountsParams{
-		Owner:  lastAccount.Owner,
 		Limit:  5,
-		Offset: 0,
+		Offset: 5,
 	}
 
 	accounts, err := testQueries.ListAccounts(context.Background(), arg)
 	require.NoError(t, err)
-	require.NotEmpty(t, accounts)
+	require.Len(t, accounts, 5)
 
 	for _, account := range accounts {
 		require.NotEmpty(t, account)
-		require.Equal(t, lastAccount.Owner, account.Owner)
 	}
 }
