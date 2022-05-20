@@ -22,7 +22,8 @@ func NewStore(db *sql.DB) *Store {
 func (store *Store) execTx(ctx context.Context, fn func(*Queries) error) error {
 	fmt.Println(">> execTx()")
 	tx, err := store.db.BeginTx(ctx, nil)
-	fmt.Println("1111")
+
+	fmt.Println(tx, err)
 	if err != nil {
 		fmt.Println("<< execTx() Error 01")
 		return err
@@ -60,8 +61,8 @@ func (store *Store) TransferTx(ctx context.Context, arg TransferTxParams) (Trans
 	var result TransferTxResult
 	fmt.Println(">>TransferTx()")
 	err := store.execTx(ctx, func(q *Queries) error {
+		fmt.Println("121212")
 		var err error
-
 		result.Transfer, err = q.CreateTransfer(ctx, CreateTransferParams{
 			FromAccountID: arg.FromAccountID,
 			ToAccountID:   arg.ToAccountID,

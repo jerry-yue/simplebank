@@ -6,8 +6,11 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # PARTICULAR PURPOSE.
 
 # This program built for i386-apple-darwin11.3.0
+ 
+make: *** No rule to make target `all'.  Stop.
 
-# Make data base, printed on Fri May 20 15:14:34 2022
+
+# Make data base, printed on Fri May 20 19:55:35 2022
 
 # Variables
 
@@ -42,7 +45,7 @@ __CFBundleIdentifier = com.microsoft.VSCode
 # environment
 P9K_SSH = 0
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /var/folders/17/z8x_h1c13mj42k2sfcn0c4200000gn/T/vscode-ipc-eb578b10-2c78-4fac-a0f8-13209c850561.sock
+VSCODE_IPC_HOOK_EXTHOST = /var/folders/17/z8x_h1c13mj42k2sfcn0c4200000gn/T/vscode-ipc-d93cb722-e84b-4a5c-9715-954874a189fe.sock
 # environment
 VSCODE_CWD = /
 # environment
@@ -100,9 +103,7 @@ MAKE_VERSION := 3.81
 # environment
 USER = jerryyue
 # makefile
-.DEFAULT_GOAL := network
-# makefile (from `Makefile', line 1)
-DB_URL = postgresql://root:secret@localhost:5432/simple_bank?sslmode=disable
+.DEFAULT_GOAL := postgres
 # environment
 LESS = -R
 # automatic
@@ -154,7 +155,7 @@ LANG = C
 # environment
 VSCODE_PID = 5766
 # variable set hash-table stats:
-# Load=71/1024=7%, Rehash=0, Collisions=2/95=2%
+# Load=70/1024=7%, Rehash=0, Collisions=2/94=2%
 
 # Pattern-specific Variable Values
 
@@ -162,9 +163,9 @@ VSCODE_PID = 5766
 
 # Directories
 
-# . (device 16777220, inode 12606862): 30 files, no impossibilities.
+# . (device 16777220, inode 12606862): 12 files, no impossibilities.
 
-# 30 files, no impossibilities in 1 directories.
+# 12 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -177,17 +178,8 @@ postgres:
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 7):
-	docker run --name postgres --network bank-network -p 5432:5432 -e POSTGRES_USER=root -e POSTGRES_PASSWORD=secret -d postgres:14-alpine
-	
-
-network:
-#  Phony target (prerequisite of .PHONY).
-#  Implicit rule search has not been done.
-#  File does not exist.
-#  File has not been updated.
-#  commands to execute (from `Makefile', line 4):
-	docker network create bank-network
+#  commands to execute (from `Makefile', line 2):
+	docker run --name postgres12 -e POSTGRES_USER=root -e POSTGRES_PASSWORD=P@ssw0rd -p 5432:5432 -d postgres:12.10-alpine 
 	
 
 # Not a target:
@@ -199,16 +191,7 @@ all:
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
-migratedown1:
-#  Phony target (prerequisite of .PHONY).
-#  Implicit rule search has not been done.
-#  File does not exist.
-#  File has not been updated.
-#  commands to execute (from `Makefile', line 28):
-	migrate -path db/migration -database "$(DB_URL)" -verbose down 1
-	
-
-.PHONY: network postgres createdb dropdb migrateup migratedown migrateup1 migratedown1 db_docs db_schema sqlc test server mock proto evans
+.PHONY: postgres createdb dropdb migratedown migrateup sqlc test
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -218,7 +201,7 @@ sqlc:
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 37):
+#  commands to execute (from `Makefile', line 17):
 	sqlc generate
 	
 
@@ -231,53 +214,19 @@ sqlc:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-04-30 03:05:11
+#  Last modified 2022-05-19 17:45:03
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
-server:
-#  Phony target (prerequisite of .PHONY).
-#  Implicit rule search has not been done.
-#  File does not exist.
-#  File has not been updated.
-#  commands to execute (from `Makefile', line 43):
-	go run main.go
-	
-
-proto:
-#  Phony target (prerequisite of .PHONY).
-#  Implicit rule search has not been done.
-#  File does not exist.
-#  File has not been updated.
-#  commands to execute (from `Makefile', line 49):
-	rm -f pb/*.go
-	rm -f doc/swagger/*.swagger.json
-	protoc --proto_path=proto --go_out=pb --go_opt=paths=source_relative \
-	--go-grpc_out=pb --go-grpc_opt=paths=source_relative \
-	--grpc-gateway_out=pb --grpc-gateway_opt=paths=source_relative \
-	--openapiv2_out=doc/swagger --openapiv2_opt=allow_merge=true,merge_file_name=simple_bank \
-	proto/*.proto
-	statik -src=./doc/swagger -dest=./doc
-	
 
 test:
 #  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 40):
+#  commands to execute (from `Makefile', line 20):
 	go test -v -cover ./...
-	
-
-db_schema:
-#  Phony target (prerequisite of .PHONY).
-#  Implicit rule search has not been done.
-#  File does not exist.
-#  File has not been updated.
-#  commands to execute (from `Makefile', line 34):
-	dbml2sql --postgres -o doc/schema.sql doc/db.dbml
 	
 
 createdb:
@@ -285,21 +234,9 @@ createdb:
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 13):
-	docker exec -it postgres createdb --username=root --owner=root simple_bank
+#  commands to execute (from `Makefile', line 5):
+	docker exec -it postgres12 createdb --username=root --owner=root simple_bank
 	
-
-evans:
-#  Phony target (prerequisite of .PHONY).
-#  Implicit rule search has not been done.
-#  File does not exist.
-#  File has not been updated.
-#  commands to execute (from `Makefile', line 59):
-	evans --host localhost --port 9090 -r repl
-	
-
- 
-make: *** No rule to make target `all'.  Stop.
 
 # Not a target:
 .DEFAULT:
@@ -307,22 +244,13 @@ make: *** No rule to make target `all'.  Stop.
 #  Modification time never checked.
 #  File has not been updated.
 
-db_docs:
-#  Phony target (prerequisite of .PHONY).
-#  Implicit rule search has not been done.
-#  File does not exist.
-#  File has not been updated.
-#  commands to execute (from `Makefile', line 31):
-	dbdocs build doc/db.dbml
-	
-
 dropdb:
 #  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 16):
-	docker exec -it postgres dropdb simple_bank
+#  commands to execute (from `Makefile', line 8):
+	docker exec -it postgres12 dropdb simple_bank
 	
 
 migrateup:
@@ -330,25 +258,8 @@ migrateup:
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 19):
-	migrate -path db/migration -database "$(DB_URL)" -verbose up
-	
-
-mysql:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-#  commands to execute (from `Makefile', line 10):
-	docker run --name mysql8 -p 3306:3306  -e MYSQL_ROOT_PASSWORD=secret -d mysql:8
-	
-
-migrateup1:
-#  Phony target (prerequisite of .PHONY).
-#  Implicit rule search has not been done.
-#  File does not exist.
-#  File has not been updated.
-#  commands to execute (from `Makefile', line 22):
-	migrate -path db/migration -database "$(DB_URL)" -verbose up 1
+#  commands to execute (from `Makefile', line 11):
+	migrate -path db/migration -database "postgresql://root:P@ssw0rd@127.0.0.1:5432/simple_bank?sslmode=disable" -verbose up
 	
 
 migratedown:
@@ -356,21 +267,12 @@ migratedown:
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 25):
-	migrate -path db/migration -database "$(DB_URL)" -verbose down
-	
-
-mock:
-#  Phony target (prerequisite of .PHONY).
-#  Implicit rule search has not been done.
-#  File does not exist.
-#  File has not been updated.
-#  commands to execute (from `Makefile', line 46):
-	mockgen -package mockdb -destination db/mock/store.go github.com/techschool/simplebank/db/sqlc Store
+#  commands to execute (from `Makefile', line 14):
+	migrate -path db/migration -database "postgresql://root:P@ssw0rd@127.0.0.1:5432/simple_bank?sslmode=disable" -verbose down
 	
 
 # files hash-table stats:
-# Load=22/1024=2%, Rehash=0, Collisions=2/50=4%
+# Load=12/1024=1%, Rehash=0, Collisions=0/31=0%
 # VPATH Search Paths
 
 # No `vpath' search paths.
@@ -382,6 +284,6 @@ mock:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Fri May 20 15:14:34 2022
+# Finished Make data base on Fri May 20 19:55:35 2022
 
  
