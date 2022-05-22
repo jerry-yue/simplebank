@@ -10,7 +10,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 make: *** No rule to make target `all'.  Stop.
 
 
-# Make data base, printed on Fri May 20 19:55:35 2022
+# Make data base, printed on Sun May 22 16:25:22 2022
 
 # Variables
 
@@ -45,7 +45,7 @@ __CFBundleIdentifier = com.microsoft.VSCode
 # environment
 P9K_SSH = 0
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /var/folders/17/z8x_h1c13mj42k2sfcn0c4200000gn/T/vscode-ipc-d93cb722-e84b-4a5c-9715-954874a189fe.sock
+VSCODE_IPC_HOOK_EXTHOST = /var/folders/17/z8x_h1c13mj42k2sfcn0c4200000gn/T/vscode-ipc-83103654-c2b6-40bc-9f8c-cc6da8f3c798.sock
 # environment
 VSCODE_CWD = /
 # environment
@@ -63,7 +63,7 @@ ELECTRON_RUN_AS_NODE = 1
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.bFSnaM8Pm1/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.vTuPrJUo2U/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
@@ -153,7 +153,7 @@ MAKELEVEL := 0
 # environment
 LANG = C
 # environment
-VSCODE_PID = 5766
+VSCODE_PID = 1378
 # variable set hash-table stats:
 # Load=70/1024=7%, Rehash=0, Collisions=2/94=2%
 
@@ -163,9 +163,9 @@ VSCODE_PID = 5766
 
 # Directories
 
-# . (device 16777220, inode 12606862): 12 files, no impossibilities.
+# . (device 16777225, inode 12606862): 13 files, no impossibilities.
 
-# 12 files, no impossibilities in 1 directories.
+# 13 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -209,6 +209,7 @@ sqlc:
 .SUFFIXES:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
+ 
 #  File has not been updated.
 
 # Not a target:
@@ -284,6 +285,6 @@ migratedown:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Fri May 20 19:55:35 2022
+# Finished Make data base on Sun May 22 16:25:22 2022
 
  
