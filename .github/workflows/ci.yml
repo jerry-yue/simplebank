@@ -40,7 +40,7 @@ jobs:
       id: go
 
     - name: Check out code into the Go module directory
-      uses: actions/setup-go@v3
+      uses: actions/checkout@v3
 
     - name: install golang-migration
       run: |
@@ -50,8 +50,9 @@ jobs:
 
     - name: Run migrations
     # make migrateup failed with make: *** No rule to make target 'migrateup'.  Stop.
-      run: migrate -path db/migration -database "postgresql://root:P@ssw0rd@127.0.0.1:5432/simple_bank?sslmode=disable" -verbose up
+    #  run: migrate -path db/migration -database "postgresql://root:P@ssw0rd@127.0.0.1:5432/simple_bank?sslmode=disable" -verbose up
+      run: make migrateup
       
     - name: Test
-    # make test
-      run: go test -v -cover ./...
+    # go test -v -cover ./...
+      run: make test
