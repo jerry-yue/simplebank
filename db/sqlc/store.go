@@ -21,6 +21,13 @@ func NewStore(db *sql.DB) *Store {
 
 func (store *Store) execTx(ctx context.Context, fn func(*Queries) error) error {
 	fmt.Println(">> execTx()")
+	defer func() {
+		err := recover() //内置函数，可以捕捉到函数异常
+		if err != nil {
+			//这里是打印错误，还可以进行报警处理，例如微信，邮箱通知
+			fmt.Println("err错误信息：", err)
+		}
+	}()
 	tx, err := store.db.BeginTx(ctx, nil)
 
 	fmt.Println(tx, err)
