@@ -12,7 +12,6 @@ type Store struct {
 }
 
 func NewStore(db *sql.DB) *Store {
-	fmt.Println(">> NewStore()")
 	return &Store{
 		db:      db,
 		Queries: New(db),
@@ -20,7 +19,7 @@ func NewStore(db *sql.DB) *Store {
 }
 
 func (store *Store) execTx(ctx context.Context, fn func(*Queries) error) error {
-	fmt.Println(">> execTx()")
+	// 异常捕捉
 	defer func() {
 		err := recover() //内置函数，可以捕捉到函数异常
 		if err != nil {
@@ -28,11 +27,11 @@ func (store *Store) execTx(ctx context.Context, fn func(*Queries) error) error {
 			fmt.Println("err错误信息：", err)
 		}
 	}()
+	// 异常捕捉
+
 	tx, err := store.db.BeginTx(ctx, nil)
 
-	fmt.Println(tx, err)
 	if err != nil {
-		fmt.Println("<< execTx() Error 01")
 		return err
 	}
 
@@ -40,13 +39,10 @@ func (store *Store) execTx(ctx context.Context, fn func(*Queries) error) error {
 	err = fn(q)
 	if err != nil {
 		if rbErr := tx.Rollback(); rbErr != nil {
-			fmt.Println("<< execTx() Error 02")
 			return fmt.Errorf("tx err: %v, rb err: %v", err, rbErr)
 		}
-		fmt.Println("<< execTx() Error 03")
 		return err
 	}
-	fmt.Println("<< execTx()")
 	return tx.Commit()
 }
 
@@ -66,9 +62,7 @@ type TransferTxResult struct {
 
 func (store *Store) TransferTx(ctx context.Context, arg TransferTxParams) (TransferTxResult, error) {
 	var result TransferTxResult
-	fmt.Println(">>TransferTx()")
 	err := store.execTx(ctx, func(q *Queries) error {
-		fmt.Println("121212")
 		var err error
 		result.Transfer, err = q.CreateTransfer(ctx, CreateTransferParams{
 			FromAccountID: arg.FromAccountID,
@@ -76,7 +70,6 @@ func (store *Store) TransferTx(ctx context.Context, arg TransferTxParams) (Trans
 			Amount:        arg.Amount,
 		})
 		if err != nil {
-			fmt.Println("<< TransferTx() with error!")
 			return err
 		}
 
@@ -98,6 +91,5 @@ func (store *Store) TransferTx(ctx context.Context, arg TransferTxParams) (Trans
 
 		return nil
 	})
-	fmt.Println("<< TransferTx()")
 	return result, err
 }
