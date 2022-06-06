@@ -24,7 +24,7 @@ func main() {
 		log.Fatal("Load config file failed: ", err)
 	}
 
-	conn, err := sql.Open(dbDriver, dbSource)
+	conn, err := sql.Open(config.DBDriver, config.DBSource)
 	if err != nil {
 		log.Fatal("Connect to db failed: ", err)
 	}
