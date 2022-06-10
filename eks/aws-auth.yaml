@@ -4,7 +4,6 @@ metadata:
   name: aws-auth
   namespace: kube-system
 data:
-
   mapUsers: |
     - userarn: arn:aws:iam::589203677308:user/Jerry_Yue
       username: Jerry_Yue
